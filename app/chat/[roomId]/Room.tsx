@@ -23,7 +23,7 @@ const identify = async (socket: PartySocket) => {
 export const Room: React.FC<{
   room: string;
   host: string;
-  user?: User | null;
+  user: User | null;
   party: string;
   messages: Message[];
 }> = ({ room, host, user: initialUser, party, messages: initialMessages }) => {

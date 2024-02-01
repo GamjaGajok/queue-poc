@@ -1,5 +1,5 @@
 import { getServerSession } from "next-auth";
-// import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import type { User } from "@/party/utils/auth";
 import Link from "next/link";
 import { Room } from "./Room";
@@ -22,8 +22,8 @@ export default async function ChatRoomPage({
   const room = res.status === 404 ? null : await res.json();
 
   // fetch user session for server rendering
-  // const session = await getServerSession(authOptions);
-  // const user = session?.user as User | null;
+  const session = await getServerSession(authOptions);
+  const user = session?.user as User | null;
 
   return (
     <div className="w-full flex flex-col gap-4 justify-between items-start">
@@ -45,7 +45,7 @@ export default async function ChatRoomPage({
           <Room
             host={PARTYKIT_HOST}
             party={party}
-            // user={user}
+            user={user}
             room={params.roomId}
             messages={room.messages ?? []}
           />
